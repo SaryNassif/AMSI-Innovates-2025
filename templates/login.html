@@ -10,13 +10,13 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
-      <a href="index.html" class="logo-link">🥬 EcoCitizens</a>
+      <a href="{{ url_for('home') }}" class="logo-link">🥬 EcoCitizens</a>
     </div>
     <div class="nav-links">
-      <a href="index.html" class="logo-link">Home</a>
-      <a href="about.html" class="logo-link">About Us</a>
-      <a href="report.html" class="logo-link">Report</a>
-      <a href="login.html" class="logo-link">Accounts/Status</a>
+      <a href="{{ url_for('home') }}" class="logo-link">Home</a>
+      <a href="{{ url_for('about') }}" class="logo-link">About Us</a>
+      <a href="{{ url_for('report') }}" class="logo-link">Report</a>
+      <a href="{{ url_for('login') }}" class="logo-link">Accounts/Status</a>      
     </div>
   </nav>
 
@@ -30,7 +30,7 @@
       <label for="password">Password:</label>
       <input type="password" id="password" placeholder="Enter your password" />
       <button type="submit">Login</button>
-      <p>Don't have an account? <a href="#">Sign up here</a>.</p>
+      <p>Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.</p>
     </form>
     
     <hr />

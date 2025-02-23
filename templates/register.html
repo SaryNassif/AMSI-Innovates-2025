@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoCitizens - Register</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="bg-green-100">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="{{ url_for('home') }}" class="logo-link">🥬 EcoCitizens</a>
+    </div>
+    <div class="nav-links">
+      <a href="{{ url_for('home') }}" class="logo-link">Home</a>
+      <a href="{{ url_for('about') }}" class="logo-link">About Us</a>
+      <a href="{{ url_for('report') }}" class="logo-link">Report</a>
+      <a href="{{ url_for('login') }}" class="logo-link">Accounts/Status</a>
+    </div>
+  </nav>
+
+  <!-- Register Content -->
+  <div class="container">
+    <h2>Register an Account</h2>
+    <p>Create your EcoCitizens account to start reporting and tracking pollution issues.</p>
+    <form class="register-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Enter a username" required>
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" placeholder="Enter your email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
