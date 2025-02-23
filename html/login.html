@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoCitizens - Account</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="bg-green-100">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html" class="logo-link">🥬 EcoCitizens</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="logo-link">Home</a>
+      <a href="about.html" class="logo-link">About Us</a>
+      <a href="report.html" class="logo-link">Report</a>
+      <a href="login.html" class="logo-link">Accounts/Status</a>
+    </div>
+  </nav>
+
+  <!-- Account and Login Content -->
+  <div class="container">
+    <h2>👤 Account Login</h2>
+    <p>Please log in to access your account and check the status of your reports.</p>
+    <form class="login-form">
+      <label for="username">Username or Email:</label>
+      <input type="text" id="username" placeholder="Enter your username or email" />
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" />
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a href="#">Sign up here</a>.</p>
+    </form>
+    
+    <hr />
+
+    <h2>Report Status</h2>
+    <p>Check the status of your submitted pollution reports.</p>
+    <div class="status-check">
+      <label>Enter Report ID:</label>
+      <input type="text" placeholder="Enter your report ID" />
+      <button>Check Status</button>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
