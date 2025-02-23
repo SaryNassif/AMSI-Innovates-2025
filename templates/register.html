@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoCitizens - Register</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body class="bg-green-100">
   <!-- Navbar -->
@@ -24,24 +24,26 @@
   <div class="container">
     <h2>Register an Account</h2>
     <p>Create your EcoCitizens account to start reporting and tracking pollution issues.</p>
-    <form class="register-form">
-      <label for="username">Username:</label>
-      <input type="text" id="username" placeholder="Enter a username" required>
+    <div class="register-container">
 
-      <label for="email">Email:</label>
-      <input type="text" id="email" placeholder="Enter your email" required>
-
-      <label for="password">Password:</label>
-      <input type="password" id="password" placeholder="Enter your password" required>
-
-      <label for="confirm-password">Confirm Password:</label>
-      <input type="password" id="confirm-password" placeholder="Confirm your password" required>
-
-      <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+      <form method="POST" action="{{ url_for('register') }}" class="register-form">
+        {{ form.hidden_tag() }}
+        <div>
+          {{ form.username.label }}
+          {{ form.username(class="form-input") }}
+        </div>
+        <div>
+          {{ form.password.label }}
+          {{ form.password(class="form-input") }}
+        </div>
+        <div>
+          {{ form.submit(class="btn") }}
+        </div>
+      </form>
+      <p style="text-align: center;">Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+    </div>
   </div>
 
-  <script src="scripts.js"></script>
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

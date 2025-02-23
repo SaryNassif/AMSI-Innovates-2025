@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoCitizens - Account</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <style>
+    .error-message {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      margin: 1rem 0;
+    }
+  </style>
 </head>
 <body class="bg-green-100">
   <!-- Navbar -->
@@ -16,7 +24,7 @@
       <a href="{{ url_for('home') }}" class="logo-link">Home</a>
       <a href="{{ url_for('about') }}" class="logo-link">About Us</a>
       <a href="{{ url_for('report') }}" class="logo-link">Report</a>
-      <a href="{{ url_for('login') }}" class="logo-link">Accounts/Status</a>      
+      <a href="{{ url_for('login') }}" class="logo-link">Accounts/Status</a>
     </div>
   </nav>
 
@@ -24,15 +32,23 @@
   <div class="container">
     <h2>👤 Account Login</h2>
     <p>Please log in to access your account and check the status of your reports.</p>
-    <form class="login-form">
-      <label for="username">Username or Email:</label>
-      <input type="text" id="username" placeholder="Enter your username or email" />
-      <label for="password">Password:</label>
-      <input type="password" id="password" placeholder="Enter your password" />
-      <button type="submit">Login</button>
+    
+    <form method="POST" action="{{ url_for('login') }}" class="login-form">
+      {{ form.hidden_tag() }}
+      <div>
+        {{ form.username.label }}
+        {{ form.username(class="form-input") }}
+      </div>
+      <div>
+        {{ form.password.label }}
+        {{ form.password(class="form-input") }}
+      </div>
+      <div>
+        {{ form.submit(class="btn") }}
+      </div>
       <p>Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.</p>
     </form>
-    
+
     <hr />
 
     <h2>Report Status</h2>
@@ -44,6 +60,6 @@
     </div>
   </div>
 
-  <script src="scripts.js"></script>
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>
