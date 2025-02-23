@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect,flash
+from flask import Flask, render_template, url_for, redirect,flash,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin,login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -64,15 +64,13 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
-                return redirect(url_for('dashboard'))
-    else:
-        flash('wrong username or password')
+                return redirect(url_for('profile'))
     return render_template('login.html',form=form)
 
-@app.route('/dashboard', methods=['GET', 'POST'])
+@app.route('/profile')
 @login_required
-def dashboard():
-    return render_template('dashboard.html')
+def profile():
+    return render_template('profile.html')
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
