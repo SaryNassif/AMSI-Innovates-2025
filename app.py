@@ -8,8 +8,11 @@ from flask_bcrypt import Bcrypt
 from openai import OpenAI
 import os
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
 
+load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
+print(api_key)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -77,7 +80,7 @@ def process_report():
     location = request.form['location']
     description = request.form['description']
 
-    client = OpenAI(api_key="")
+    client = OpenAI(api_key=api_key)
     
     # New structured prompt for formal reports
     prompt = f"""
