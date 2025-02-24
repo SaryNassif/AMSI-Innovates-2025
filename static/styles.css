@@ -359,3 +359,52 @@ form p{
   padding: 0;
 }
 
+/* Reports Container */
+.reports-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center; /* Center reports */
+}
+
+/* Each Report Card */
+.report-card {
+    background-color: white;
+    width: 80%; /* Now it takes 80% of the screen */
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid #065f46;
+    transition: transform 0.2s ease-in-out;
+    text-align: left;
+}
+
+.report-card:hover {
+    transform: scale(1.02);
+}
+
+.report-card h3 {
+    color: #065f46;
+    margin-bottom: 0.5rem;
+}
+
+.report-card p {
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+}
+
+/* Delete Button */
+.btn-delete {
+    background-color: #dc2626;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #b91c1c;
+}

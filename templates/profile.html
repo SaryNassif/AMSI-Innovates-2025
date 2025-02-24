@@ -75,6 +75,32 @@
     </div>
   </div>
 
+  <div class="container">
+    <h1>Your Submitted Pollution Reports:</h1>
+    
+    <!-- Reports List -->
+    <div class="reports-list">
+      {% for report in reports %}
+        <div class="report-card">
+          <h3>📑 Report {{ loop.index }}</h3>
+          <p><strong>Location:</strong> {{ report.location }}</p>
+          <p><strong>User Description:</strong> {{ report.description }}</p>
+          <p><strong>AI Report:</strong> {{ report.ai_response }}</p>
+  
+          <!-- Delete Button -->
+          <form method="POST" action="{{ url_for('delete_report', report_id=report.id) }}">
+            <button type="submit" class="btn-delete">🗑️ Delete</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  
+    {% if reports|length == 0 %}
+      <p>No reports submitted yet.</p>
+    {% endif %}
+  </div>
+  
+
   <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

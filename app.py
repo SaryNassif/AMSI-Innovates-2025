@@ -5,6 +5,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
+from openai import OpenAI
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -47,6 +50,12 @@ class LoginForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField('Login')
 
+class PollutionReport(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    location = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    ai_response = db.Column(db.Text)
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -55,10 +64,58 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route('/report')
+@app.route('/report',methods=["GET"])
 @login_required
 def report():
     return render_template('report.html')
+
+@app.route('/process_report', methods=['POST'])
+@login_required
+def process_report():
+    location = request.form['location']
+    description = request.form['description']
+
+    client = OpenAI(api_key="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")
+    
+    # New structured prompt for formal reports
+    prompt = f"""
+    You are an AI system assisting in documenting environmental pollution reports for government authorities. 
+    Convert the given user input into a **formal report** with the following structure:
+
+    ### **Pollution Report**
+    - **Location:** {location}
+    - **Description of Issue:** {description}
+    - **Possible Causes:** Provide possible causes of this pollution.
+    - **Impact on Environment & Public Health:** Explain how this affects people and the environment.
+    - **Recommended Actions:** Suggest actions that should be taken by authorities.
+
+    Ensure the report is **formal, structured, and actionable, concise and between 100-150 words**.
+    """
+
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    gpt_response = completion.choices[0].message.content
+
+    # Save structured report into database
+    new_report = PollutionReport(location=location, description=description, ai_response=gpt_response)
+    db.session.add(new_report)
+    db.session.commit()
+
+    return render_template('report.html', gpt_response=gpt_response)
+
+@app.route('/delete_report/<int:report_id>', methods=['POST'])
+@login_required
+def delete_report(report_id):
+    report = PollutionReport.query.get_or_404(report_id)
+
+    # Only allow the user to delete their own reports
+    db.session.delete(report)
+    db.session.commit()
+
+    return redirect(url_for('profile'))
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -74,7 +131,8 @@ def login():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+    reports = PollutionReport.query.all()
+    return render_template('profile.html',reports=reports)
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
