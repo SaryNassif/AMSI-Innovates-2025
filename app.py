@@ -9,6 +9,8 @@ from openai import OpenAI
 import os
 from werkzeug.utils import secure_filename
 
+api_key = os.getenv("OPENAI_API_KEY")
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'thisisasecretkey'
@@ -75,7 +77,7 @@ def process_report():
     location = request.form['location']
     description = request.form['description']
 
-    client = OpenAI(api_key="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")
+    client = OpenAI(api_key="")
     
     # New structured prompt for formal reports
     prompt = f"""
