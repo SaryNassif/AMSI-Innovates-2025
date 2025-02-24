@@ -31,19 +31,19 @@
       <p>A citizen science platform for reporting pollution and making Dubai cleaner.</p>
     </div>
   
-    <!-- Statistics Section -->
     <div class="stats-container">
       <h2>📊 Reports by Community</h2>
-      <p>See how many pollution reports have been filed in different communities.</p>
+      <p>Tap a community to view detailed reports.</p>
       <div class="stats-grid">
         {% for community, count in community_stats.items() %}
-        <div class="stat-box">
-          <h3>{{ community }}</h3>
-          <p>{{ count }} reports</p>
-        </div>
+          <a href="{{ url_for('community_reports', community=community) }}" class="stat-box">
+            <h3>{{ community }}</h3>
+            <p>{{ count }} reports</p>
+          </a>
         {% endfor %}
       </div>
     </div>
+    
 
     <!-- Tiles Section -->
     <div class="tiles">
@@ -64,7 +64,7 @@
         <p>Track the status of your reports and manage your account settings.</p>
       </div>
     </div>  
-    
+
     <!-- Instagram Section -->
     <div class="instagram-container">
       <h2>📸 Follow Us on Instagram</h2>
@@ -79,8 +79,6 @@
 
   </div>
   
-  
-
   <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

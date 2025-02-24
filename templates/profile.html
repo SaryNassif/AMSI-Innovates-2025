@@ -78,15 +78,18 @@
   <div class="container" style="padding: 0rem 1.5rem;">
     <h1>Your Submitted Pollution Reports:</h1>
     
-    <!-- Reports List -->
     <div class="reports-list">
       {% for report in reports %}
         <div class="report-card">
           <h3>📑 Report {{ loop.index }}</h3>
           <p><strong>📍 Location:</strong> {{ report.location }}</p>
           <p><strong>🏙️ Community:</strong> {{ report.community }}</p>
-          <p><strong>📝 Description:</strong> {{ report.description }}</p>
+          <p><strong>📝 User Description:</strong> {{ report.description }}</p>
+          <p><strong>🔥 Severity (1-10):</strong> <span class="severity-{{ report.severity }}">{{ report.severity }}</span></p>
           <p><strong>🤖 AI Report:</strong> {{ report.ai_response }}</p>
+    
+          <!-- Download Button -->
+          <a href="{{ url_for('download_report', report_id=report.id) }}" class="btn-download">⬇️ Download Report</a>
     
           <!-- Delete Button -->
           <form method="POST" action="{{ url_for('delete_report', report_id=report.id) }}">
@@ -96,11 +99,14 @@
       {% endfor %}
     </div>
     
+    
   
     {% if reports|length == 0 %}
       <p>No reports submitted yet.</p>
     {% endif %}
   </div>
+  <br>
+  <br>
   
 
   <script src="{{ url_for('static', filename='scripts.js') }}"></script>

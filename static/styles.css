@@ -488,3 +488,20 @@ form p{
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* Download Report Button */
+.btn-download {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #065f46;
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-download:hover {
+    background-color: #047857;
+}
