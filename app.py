@@ -306,7 +306,6 @@ def delete_report(report_id):
     return redirect(url_for('profile'))
 
 @app.route('/community_reports/<community>')
-@login_required
 def community_reports(community):
     reports = PollutionReport.query.filter_by(community=community).all()
     return render_template('community_reports.html', community=community, reports=reports)
