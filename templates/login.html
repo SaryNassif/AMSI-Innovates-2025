@@ -24,27 +24,31 @@
     </div>
   </nav>
 
-  <!-- Account and Login Content -->
   <div class="container">
     <h2>👤 Account Login</h2>
     <p>Please log in to access your account and check the status of your reports.</p>
-
     <form method="POST" action="{{ url_for('login') }}" class="login-form">
-      {{ form.hidden_tag() }}
-      <div>
-        {{ form.username.label }}
-        {{ form.username(class="form-input") }}
-      </div>
-      <div>
-        {{ form.password.label }}
-        {{ form.password(class="form-input") }}
-      </div>
-      <div>
-        {{ form.submit(class="btn") }}
-      </div>
-      <p>Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.</p>
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.username.label }}
+            {{ form.username(class="form-input") }}
+        </div>
+        <div>
+            {{ form.password.label }}
+            {{ form.password(class="form-input") }}
+        </div>
+        <div>
+            {{ form.submit(class="btn") }}
+        </div>
+        {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a>.</p>
     </form>
-  </div>
+</div>
+
 
   <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>

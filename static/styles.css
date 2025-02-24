@@ -408,3 +408,83 @@ form p{
 .btn-delete:hover {
     background-color: #b91c1c;
 }
+
+
+.error-message {
+    color: #b30000;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Statistics Section */
+.stats-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-box {
+    background-color: #e6f4ea;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Instagram Section */
+.instagram-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid #e1306c;
+}
+
+.instagram-embed {
+    margin-top: 1rem;
+}
+
+.btn-instagram {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #e1306c;
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-instagram:hover {
+    background-color: #c72c5a;
+}
+
+/* Tiles Section */
+.tiles {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+    .tiles {
+        grid-template-columns: 1fr 1fr;
+    }
+}

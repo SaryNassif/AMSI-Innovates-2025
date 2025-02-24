@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoCitizens - Home</title>
-  <link rel="stylesheet" href="../static/styles.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body class="bg-green-100">
   <!-- Navbar -->
@@ -24,10 +24,27 @@
     </div>
   </nav>
 
-  <!-- Home Content -->
   <div class="container">
-    <h1>Welcome to EcoCitizens</h1>
-    <p>A citizen science platform for reporting pollution and making Dubai cleaner.</p>
+    <!-- Slogan -->
+    <div class="slogan">
+      <h1>🌍 Spot it. Report it. Stop it.</h1>
+      <p>A citizen science platform for reporting pollution and making Dubai cleaner.</p>
+    </div>
+  
+    <!-- Statistics Section -->
+    <div class="stats-container">
+      <h2>📊 Reports by Community</h2>
+      <p>See how many pollution reports have been filed in different communities.</p>
+      <div class="stats-grid">
+        {% for community, count in community_stats.items() %}
+        <div class="stat-box">
+          <h3>{{ community }}</h3>
+          <p>{{ count }} reports</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
     <!-- Tiles Section -->
     <div class="tiles">
       <div class="tile">
@@ -46,9 +63,24 @@
         <h2>👤 Accounts/Status</h2>
         <p>Track the status of your reports and manage your account settings.</p>
       </div>
+    </div>  
+    
+    <!-- Instagram Section -->
+    <div class="instagram-container">
+      <h2>📸 Follow Us on Instagram</h2>
+      <p>Stay updated with EcoCitizens' latest activities.</p>
+      <div class="instagram-embed">
+        <iframe src="https://www.instagram.com/p/CODE/?utm_source=ig_embed&amp;utm_campaign=loading" 
+                width="350" height="420" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+      </div>
+      <a href="https://www.instagram.com/your_instagram/" target="_blank" class="btn-instagram">Follow Us</a>
     </div>
-  </div>
+  
 
-  <script src="scripts.js"></script>
+  </div>
+  
+  
+
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

@@ -9,6 +9,9 @@ from openai import OpenAI
 import os
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
+import re
+from collections import Counter
+from sqlalchemy import func
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
@@ -32,6 +35,29 @@ def load_user(user_id):
 def no_spaces(form, field):
     if ' ' in field.data:
         raise ValidationError("Spaces are not allowed.")
+
+def validate_description(description):
+    """
+    Checks if the user input is meaningful.
+    - Rejects input with excessive random letters or short nonsense.
+    - Allows real words and meaningful sentences.
+    """
+
+    # Check if the description is too short
+    if len(description) < 10:
+        return False
+
+    # Reject inputs that are just gibberish (e.g., "ajshdjkashd")
+    if re.fullmatch(r"[a-zA-Z]{8,}", description):
+        return False
+
+    # Allow only descriptions with proper words (at least 3 words)
+    words = description.split()
+    if len(words) < 3:
+        return False
+
+    return True
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -58,12 +84,22 @@ class LoginForm(FlaskForm):
 class PollutionReport(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     location = db.Column(db.String(200), nullable=False)
+    community = db.Column(db.String(100), nullable=False)  # ADD THIS
     description = db.Column(db.Text, nullable=False)
     ai_response = db.Column(db.Text)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    # Query database to count reports per community
+    community_reports = (
+        db.session.query(PollutionReport.community, func.count(PollutionReport.id))
+        .group_by(PollutionReport.community)
+        .all()
+    )
+    # Convert results into a dictionary { "Community Name": Count }
+    community_stats = {community: count for community, count in community_reports}
+
+    return render_template('index.html', community_stats=community_stats)
 
 @app.route('/about')
 def about():
@@ -78,17 +114,22 @@ def report():
 @login_required
 def process_report():
     location = request.form['location']
-    description = request.form['description']
+    community = request.form['community']
+    description = request.form['description'].strip()
+
+    # Validate user input
+    if not validate_description(description):
+        return render_template('report.html', error="Your description must be meaningful and not just random characters.")
 
     client = OpenAI(api_key=api_key)
-    
-    # New structured prompt for formal reports
+
     prompt = f"""
     You are an AI system assisting in documenting environmental pollution reports for government authorities. 
     Convert the given user input into a **formal report** with the following structure:
 
     ### **Pollution Report**
     - **Location:** {location}
+    - **Community:** {community}
     - **Description of Issue:** {description}
     - **Possible Causes:** Provide possible causes of this pollution.
     - **Impact on Environment & Public Health:** Explain how this affects people and the environment.
@@ -101,16 +142,15 @@ def process_report():
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}]
     )
-    
+
     gpt_response = completion.choices[0].message.content
 
     # Save structured report into database
-    new_report = PollutionReport(location=location, description=description, ai_response=gpt_response)
+    new_report = PollutionReport(location=location, community=community, description=description, ai_response=gpt_response)
     db.session.add(new_report)
     db.session.commit()
 
     return render_template('report.html', gpt_response=gpt_response)
-
 @app.route('/delete_report/<int:report_id>', methods=['POST'])
 @login_required
 def delete_report(report_id):
@@ -122,8 +162,25 @@ def delete_report(report_id):
 
     return redirect(url_for('profile'))
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm()
+    error = None  # Initialize error variable
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                return redirect(url_for('profile'))
+            else:
+                error = "Invalid password. Please try again."
+        else:
+            error = "Username not found. Please register first."
+
+    return render_template('login.html', form=form, error=error)
+
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
