@@ -5,6 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoCitizens - About Us</title>
   <link rel="stylesheet" href="../static/styles.css" />
+  <link rel="shortcut icon" href="/static/Logo_bgyes.jpg" type="image/x-icon">
+  <style>
+    /* Container for Text and Developer/Designer Frames */
+.text-frame-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: #e6f4ea;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Left Section Styling */
+.about-text {
+    width: 50%;
+    padding: 20px;
+}
+
+.about-text h1 {
+    font-size: 2rem;
+    color: #065f46;
+    margin-bottom: 1rem;
+}
+
+.about-text p {
+    font-size: 1rem;
+    color: #065f46;
+    line-height: 1.6;
+}
+
+/* Right Section: Developer & Designer Frames */
+.team-frame-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.team-frame {
+    width: 180px;
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border: 4px solid #065f46;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-frame img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 4px solid #065f46;
+}
+
+.team-frame h3 {
+    color: #065f46;
+    margin-top: 0.75rem;
+}
+
+.team-frame p {
+    color: #4b5563;
+    font-size: 1rem;
+}
+
+  </style>
 </head>
 <body class="bg-green-100">
   <!-- Navbar -->
@@ -26,8 +93,9 @@
 
   <!-- About Us Content -->
   <div class="container">
-    <div class="textvideocontainer">
-      <div class="about-ecocitizens-container">
+    <div class="text-frame-container">
+      <!-- Left Section: About EcoCitizens -->
+      <div class="about-text">
         <h1>About EcoCitizens</h1>
         <p>
           EcoCitizens is a citizen science platform dedicated to empowering individuals in Dubai to report pollution issues they encounter.
@@ -43,8 +111,18 @@
         </p>
       </div>
 
-      <div class="videocontainer">
-        <video src="video still in progress will upload soon.mp4" controls class="videoitem"></video>
+      <!-- Right Section: Developer & Designer Frames -->
+      <div class="team-frame-container">
+        <div class="team-frame">
+          <img src="/static/Sary.jpg" alt="Developer">
+          <h3>Developer</h3>
+          <p>Sary Nassif</p>
+        </div>
+        <div class="team-frame">
+          <img src="/static/blank-profile-picture-973460_1280.webp" alt="Designer">
+          <h3>Designer</h3>
+          <p>Rami Sabra</p>
+        </div>
       </div>
     </div>
 

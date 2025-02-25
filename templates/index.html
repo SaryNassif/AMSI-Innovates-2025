@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoCitizens - Home</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="shortcut icon" href="/static/Logo_bgyes.jpg" type="image/x-icon">
 </head>
 <body class="bg-green-100">
   <!-- Navbar -->
@@ -65,18 +66,16 @@
       </div>
     </div>  
 
-    <!-- Instagram Section -->
-    <div class="instagram-container">
-      <h2>📸 Follow Us on Instagram</h2>
-      <p>Stay updated with EcoCitizens' latest activities.</p>
-      <div class="instagram-embed">
-        <iframe src="https://www.instagram.com/p/CODE/?utm_source=ig_embed&amp;utm_campaign=loading" 
-                width="350" height="420" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
-      </div>
-      <a href="https://www.instagram.com/your_instagram/" target="_blank" class="btn-instagram">Follow Us</a>
-    </div>
-  
-
+<!-- Instagram Section -->
+  <div class="instagram-container" style="max-width: 400px; margin: 2rem auto; text-align: center; padding: 1.5rem; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+  <h2>📸 Follow Us on Instagram</h2>
+  <p>Stay updated with EcoCitizens' latest activities.</p>
+  <div class="instagram-embed" style="display: flex; justify-content: center;">
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/ecocitizens_ae/" data-instgrm-version="14" style="max-width: 350px;"></blockquote>
+    <script async src="https://www.instagram.com/embed.js"></script>
+  </div>
+  <a href="https://www.instagram.com/ecocitizens_ae/" target="_blank" class="btn-instagram" style="display: block; margin-top: 1rem; padding: 0.5rem 1rem; background-color: #065f46; color: white; text-decoration: none; border-radius: 5px;">Follow Us</a>
+  </div>
   </div>
   
   <script src="{{ url_for('static', filename='scripts.js') }}"></script>

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcoCitizens - Report Pollution</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="shortcut icon" href="/static/Logo_bgyes.jpg" type="image/x-icon">
 </head>
 <body class="bg-green-100">
   <!-- Navbar -->
@@ -33,21 +34,25 @@
       <input type="text" name="location" placeholder="Enter location" required />
       
       <label>🏙️ Community:</label>
-      <select name="community" required>
-        <option value="">Select a Community</option>
-        <option value="Downtown Dubai">Downtown Dubai</option>
-        <option value="Dubai Marina">Dubai Marina</option>
-        <option value="Jumeirah">Jumeirah</option>
-        <option value="Business Bay">Business Bay</option>
-        <option value="Palm Jumeirah">Palm Jumeirah</option>
-        <option value="Deira">Deira</option>
-        <option value="Bur Dubai">Bur Dubai</option>
-        <option value="Mirdif">Mirdif</option>
-        <option value="Jumeirah Village Circle">Jumeirah Village Circle</option>
-        <option value="Dubai Silicon Oasis">Dubai Silicon Oasis</option>
-        <option value="Al Barsha">Al Barsha</option>
-        <option value="Motor City">Motor City</option>
+      <select name="community" required 
+        style="display: inline-block; width: 100%; padding: 10px; font-size: 16px; border: 1px solid #d1d5db; border-radius: 8px; background-color: white; cursor: pointer; color: #4b5563;">
+          <option value="" disabled selected style="color: #9ca3af;">Select a Community</option>
+          <option value="Downtown Dubai">Downtown Dubai</option>
+          <option value="Dubai Marina">Dubai Marina</option>
+          <option value="Jumeirah">Jumeirah</option>
+          <option value="Business Bay">Business Bay</option>
+          <option value="Palm Jumeirah">Palm Jumeirah</option>
+          <option value="Deira">Deira</option>
+          <option value="Bur Dubai">Bur Dubai</option>
+          <option value="Mirdif">Mirdif</option>
+          <option value="Jumeirah Village Circle">Jumeirah Village Circle</option>
+          <option value="Dubai Silicon Oasis">Dubai Silicon Oasis</option>
+          <option value="Al Barsha">Al Barsha</option>
+          <option value="Motor City">Motor City</option>
       </select>
+      <br>
+      <br>  
+      
     
       <label>📝 Description:</label>
       <textarea name="description" placeholder="Describe the issue" required></textarea>
